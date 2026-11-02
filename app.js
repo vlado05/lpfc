@@ -96,11 +96,11 @@ function render() {
         <div class="teams">${escapeHtml(match.home)} <span class="versus">—</span> ${escapeHtml(match.away)}</div>
         <div class="match-meta">${match.venue ? `<span>⌖ ${escapeHtml(match.venue)}</span>` : ""}</div>
         <a class="calendar-button"
-           href="${escapeHtml(googleCalendarUrl(match))}"
-           target="_blank"
-           rel="noopener noreferrer">
-          + Добави в Google Календар
-        </a>
+   href="${escapeHtml(googleCalendarUrl(match))}"
+   onclick="openGoogleCalendar(event, this.href)">
+  <span class="calendar-icon"></span>
+  Добави в Google Календар
+</a>
       </div>
       <div class="time">${escapeHtml(match.time)} ч.</div>
     </article>`;
