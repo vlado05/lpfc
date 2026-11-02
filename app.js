@@ -31,7 +31,6 @@ function formatDate(dateString) {
     weekday: date.toLocaleDateString("bg-BG", { weekday: "long" })
   };
 }
-}
 
 function escapeHtml(value = "") {
   return String(value).replace(/[&<>"']/g, char => ({
