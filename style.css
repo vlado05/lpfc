@@ -86,3 +86,18 @@ footer {
   .time { grid-column: 2; font-size: 17px; }
   footer { flex-direction: column; }
 }
+.filter-logo {
+  width: 58px;
+  height: 44px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-logo img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
