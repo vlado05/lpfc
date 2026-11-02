@@ -19,11 +19,18 @@ function parseLocalDate(date, time = "00:00") {
 
 function formatDate(dateString) {
   const date = parseLocalDate(dateString);
+  const months = [
+    "ЯНУ", "ФЕВ", "МАР", "АПР",
+    "МАЙ", "ЮНИ", "ЮЛИ", "АВГ",
+    "СЕП", "ОКТ", "НОЕ", "ДЕК"
+  ];
+
   return {
     day: String(date.getDate()).padStart(2, "0"),
-    month: date.toLocaleDateString("bg-BG", { month: "short" }).replace(".", ""),
+    month: months[date.getMonth()],
     weekday: date.toLocaleDateString("bg-BG", { weekday: "long" })
   };
+}
 }
 
 function escapeHtml(value = "") {
