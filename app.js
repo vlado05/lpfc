@@ -38,6 +38,32 @@ function escapeHtml(value = "") {
   })[char]);
 }
 
+function googleCalendarUrl(match) {
+  const start = parseLocalDate(match.date, match.time);
+  const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+
+  function formatGoogleDate(date) {
+    return date.getFullYear() +
+      String(date.getMonth() + 1).padStart(2, "0") +
+      String(date.getDate()).padStart(2, "0") + "T" +
+      String(date.getHours()).padStart(2, "0") +
+      String(date.getMinutes()).padStart(2, "0") + "00";
+  }
+
+  const title = `Локомотив Пловдив – ${match.away}`;
+  const details = `Спорт: ${sportNames[match.sport] || "Спорт"}\nМач: ${match.home} – ${match.away}`;
+
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: title,
+    dates: `${formatGoogleDate(start)}/${formatGoogleDate(end)}`,
+    details,
+    location: match.venue || ""
+  });
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
 function render() {
   const now = new Date();
 
@@ -66,9 +92,15 @@ function render() {
         <div class="date-month">${escapeHtml(date.month)} · ${escapeHtml(date.weekday)}</div>
       </div>
       <div class="match-info">
-        <div class="sport-label">${sportNames[match.sport] || "Спорт"}</div>
+        <div class="sport-label">${escapeHtml(sportNames[match.sport] || "Спорт")}</div>
         <div class="teams">${escapeHtml(match.home)} <span class="versus">—</span> ${escapeHtml(match.away)}</div>
         <div class="match-meta">${match.venue ? `<span>⌖ ${escapeHtml(match.venue)}</span>` : ""}</div>
+        <a class="calendar-button"
+           href="${escapeHtml(googleCalendarUrl(match))}"
+           target="_blank"
+           rel="noopener noreferrer">
+          + Добави в Google Календар
+        </a>
       </div>
       <div class="time">${escapeHtml(match.time)} ч.</div>
     </article>`;
