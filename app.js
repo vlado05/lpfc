@@ -1,3 +1,4 @@
+
 const sportNames = {
   football: "Футбол",
   volleyball: "Волейбол",
@@ -33,6 +34,7 @@ function escapeHtml(value = "") {
 
 function render() {
   const now = new Date();
+
   const visible = allMatches
     .filter(match => currentFilter === "all" || match.sport === currentFilter)
     .filter(match => parseLocalDate(match.date, match.time) >= now)
@@ -44,13 +46,14 @@ function render() {
     matchesEl.innerHTML = `<div class="empty">
       <div class="empty-icon">⚽</div>
       <h3>Няма предстоящи мачове</h3>
-      <p>Когато добавиш срещи в <code>matches.json</code>, те ще се появят тук.</p>
+      <p>Добави срещи в съответния JSON файл.</p>
     </div>`;
     return;
   }
 
   matchesEl.innerHTML = visible.map(match => {
     const date = formatDate(match.date);
+
     return `<article class="match-card">
       <div class="date-box">
         <div class="date-day">${date.day}</div>
@@ -68,13 +71,32 @@ function render() {
 
 async function loadMatches() {
   try {
-    const response = await fetch(`matches.json?v=${Date.now()}`);
-    if (!response.ok) throw new Error("Неуспешно зареждане на matches.json");
-    allMatches = await response.json();
-    if (!Array.isArray(allMatches)) throw new Error("matches.json трябва да съдържа списък");
+    const files = [
+      "football.json",
+      "volleyball.json",
+      "basketball.json"
+    ];
+
+    const results = await Promise.all(
+      files.map(async file => {
+        const response = await fetch(`${file}?v=${Date.now()}`);
+        if (!response.ok) throw new Error(`Грешка при зареждане на ${file}`);
+
+        const data = await response.json();
+        if (!Array.isArray(data)) throw new Error(`${file} трябва да съдържа списък`);
+
+        return data;
+      })
+    );
+
+    allMatches = results.flat();
     render();
+
   } catch (error) {
-    matchesEl.innerHTML = `<div class="empty"><h3>Не успях да заредя програмата</h3><p>Провери дали файлът <code>matches.json</code> е качен и съдържа валиден JSON.</p></div>`;
+    matchesEl.innerHTML = `<div class="empty">
+      <h3>Не успях да заредя програмата</h3>
+      <p>Провери трите JSON файла.</p>
+    </div>`;
     countEl.textContent = "Грешка";
     console.error(error);
   }
