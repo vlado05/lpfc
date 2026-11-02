@@ -52,7 +52,7 @@ function render() {
     matchesEl.innerHTML = `<div class="empty">
       <div class="empty-icon">⚽</div>
       <h3>Няма предстоящи мачове</h3>
-      <p>Добави срещи в съответния JSON файл.</p>
+      <p>Ще бъдат публикувани, когато има официални данни.</p>
     </div>`;
     return;
   }
