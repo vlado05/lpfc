@@ -87,8 +87,8 @@ footer {
   footer { flex-direction: column; }
 }
 .filter-logo {
-  width: 58px;
-  height: 44px;
+  width: 90px;
+  height: 65px;
   padding: 5px;
   display: flex;
   align-items: center;
