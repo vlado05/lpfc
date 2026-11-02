@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <title>Локомотив Пловдив — Програма</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">Л</div>
+      <div>
+        <div class="eyebrow">СПОРТЕН КАЛЕНДАР</div>
+        <h1>Локомотив <span>Пловдив</span></h1>
+      </div>
+    </div>
+    <div class="season">ОФИЦИАЛНИ МАЧОВЕ</div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow">ЕДИН КЛУБ · ТРИ СПОРТА</p>
+      <h2>Програма на<br><span>черно-белите</span></h2>
+      <p class="intro-copy">Предстоящи официални срещи на Локомотив Пловдив.</p>
+    </section>
+
+    <nav class="filters" aria-label="Филтър по спорт">
+      <button class="filter active" data-filter="all">Всички</button>
+      <button class="filter" data-filter="football">Футбол</button>
+      <button class="filter" data-filter="volleyball">Волейбол</button>
+      <button class="filter" data-filter="basketball">Баскетбол</button>
+    </nav>
+
+    <section class="schedule">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">КАЛЕНДАР</p>
+          <h2 id="list-title">Предстоящи мачове</h2>
+        </div>
+        <span class="match-count" id="match-count">0 мача</span>
+      </div>
+      <div id="matches" class="matches" aria-live="polite">
+        <div class="empty">
+          <div class="empty-icon">⚽</div>
+          <h3>Все още няма добавени мачове</h3>
+          <p>Добави срещи във файла <code>matches.json</code> и публикувай сайта отново.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>ЛОКОМОТИВ ПЛОВДИВ</span>
+    <span>Черно-бели завинаги.</span>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
