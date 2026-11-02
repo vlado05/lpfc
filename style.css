@@ -109,3 +109,22 @@ footer {
   background: #eee;
   border-color: #eee;
 }
+
+.calendar-button {
+  display: inline-block;
+  margin-top: 13px;
+  padding: 8px 12px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  transition: background .2s, border-color .2s;
+}
+
+.calendar-button:hover {
+  background: #d71920;
+  border-color: #d71920;
+}
+
